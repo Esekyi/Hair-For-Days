@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="{{url_for('static', filename='images/apple-touch-icon.png')}}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{url_for('static', filename='images/favicon-32x32.png')}}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static', filename='images/favicon-16x16.png')}}">
+  <link rel="manifest" href="{{url_for('static', filename='css/site.webmanifest')}}">
+  <!-- Bootstrap CSS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+  <script src="https://kit.fontawesome.com/a346d54399.js" crossorigin="anonymous"></script>
+
+  {% if title %}
+  <title>{{title}}</title>
+  {% else %}
+  <title>hairForDays</title>
+  {% endif %}
+  </head>
+
+<body>
+  <style>
+    body {
+      font: 400 16px/1.5 'Roboto', "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background-color: #fff;
+      color: #000000;
+    }
+
+    footer {
+      background-color: #212529;
+    }
+
+    .bd-footer a {
+      color: #5a5a5a;
+      text-decoration: none;
+    }
+
+    .fab:hover {
+      color: #fff;
+    }
+    .copyRight:hover{
+      color:rgb(218, 170, 72) ;
+      border-bottom: 2px solid rgb(218, 170, 72);
+    }
+    .contact:hover{
+      color: rgb(204, 198, 198);
+      cursor: pointer;
+    }
+  </style>
+
+  {% block body %}
+  
+  {% endblock %}
+
+  <!-- Footer -->
+  <footer class="bd-footer mt-5">
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <div class="me-5 d-none d-lg-block"><span>Get connected with us on social networks:</span></div>
+      <div class="skert">
+        <a href="" class="me-4 text-reset"><i class="fab fa-facebook"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-twitter"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-google"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-instagram"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-linkedin"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-github"></i></a>
+      </div>
+    </section>
+
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <div class="row mt-3">
+      
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto">
+            <h6 class="fw-bold">
+              <div class="col-lg-3 mb-3">
+                <!--===============LOGO  IMAGE =================-->
+                <a class="d-inline-flex align-items-center link-info text-decoration-none" href="/" aria-label="hairForDays">
+                  <img src="{{url_for('static', filename='images/hairForDaysLOGO.png')}}" alt="" width="50">
+
+                  <a class="navbar-brand text logo-top" href="/" style="color: rgb(218, 170, 72);">
+                    <span>hair</span><span style="color: black;">ForDay$</span>
+                  </a>
+                  <!--===============LOGO  IMAGE =================-->
+
+                  </a>
+                  </h6>
+                  <ul class="list-unstyled">
+                    <li class="mb-2">
+                      A hair brand that understands women. Your Hair is indeed
+                      your crown that’s why we give you the very best.
+                      Long lasting, natural and beautiful hair is every
+                      babygirl’s need!
+                      </li>
+                      </ul>
+                      </div>
+                  
+
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <h6 class="text-uppercase fw-bold mb-4 contact">Contact</h6>
+            <span>
+              <li class="mb-2 list-unstyled contact"><i class="fas fa-home"></i> New York, NY 10012, US</li>
+            </span>
+            <span>
+              <li class="mb-2 list-unstyled contact"><i class="fas fa-phone"></i>&nbsp; 024-200-2602</li>
+            </span>
+            <span>
+              <li class="mb-2 list-unstyled contact">
+                <i class="fas fa-envelope"></i>
+                &nbsp; info@hairForDays.com
+              </li>
+            </span>
+            </div>
+            
+            </div>
+            </div>
+            </section>
+            <!-- Copyright -->
+            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">© 2021 Copyright:
+      <a class="text-reset fw-bold copyRight" href="https://hairForDays.com/"><span
+          style="color:#fff ;font-family: 'Poppins', sans-serif;">hairForDays</span></a>
+      </div>
+      </footer>
+      <!-- Footer -->
+      <script src="{{url_for('static', filename='js/popper.min.js')}}"></script>
+      <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+      </body>
+
+</html>

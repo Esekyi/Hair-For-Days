@@ -1,0 +1,104 @@
+{% extends 'base2.html' %}
+
+
+{% block body %}
+{% include 'Navbar.html' %}
+<style>
+    /* GLOBAL STYLES
+-------------------------------------------------- */
+    /* Padding below the footer and lighter body text */
+
+    body {
+        font: 400 16px/1.5 'Roboto', "Helvetica Neue", Helvetica, Arial, sans-serif;
+        /* background-color: rgb(231, 231, 231); */
+        color: #5a5a5a;
+
+    }
+
+    /* Featurettes
+------------------------- */
+
+    .featurette-divider {
+        margin: 5rem 0;
+        /* Space out the Bootstrap <hr> more */
+    }
+
+    /* Thin out the marketing headings */
+    .featurette-heading {
+        font-weight: 300;
+        line-height: 1;
+        /* rtl:remove */
+        letter-spacing: -.05rem;
+    }
+
+    .vehicle-card {
+        min-width: 300px;
+    }
+
+    .vehicle-card:hover {
+        box-shadow: 0 0 20px 5px #aaa;
+        transition: all .3s ease-out;
+    }
+
+    .vehicle-card,
+    .vehicle-card>* {
+        text-decoration: none;
+        color: #5a5a5a;
+
+    }
+
+
+    /* RESPONSIVE CSS
+-------------------------------------------------- */
+
+    @media (min-width: 40em) {
+        .featurette-heading {
+            font-size: 50px;
+        }
+    }
+
+    @media (min-width: 62em) {
+        .featurette-heading {
+            margin-top: 7rem;
+        }
+    }
+
+    @media all and (min-width: 992px) {
+        .navbar .nav-item .dropdown-menu {
+            display: none;
+        }
+
+        .navbar .nav-item:hover .nav-link {}
+
+        .navbar .nav-item:hover .dropdown-menu {
+            display: block;
+        }
+
+        .navbar .nav-item .dropdown-menu {
+            margin-top: 0;
+        }
+    }
+</style>
+<main>
+    <div class="container">
+        <div class="row">
+            {% for item in items %}
+            <div class="col-md-3 mt-3">
+                <a href="{{url_for('view_single_page', id=item.id)}}" class="card h-100 vehicle-card">
+                    <img style="object-fit: cover;" src="{{url_for('static', filename='images/' + item.image_1)}}"
+                        class="card-img-top" alt="{{item.name}}" height="200">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{item.name}}</h5>
+
+                        <p class="card-text text-center">Price: ${{item.price | numberFormat}}</p>
+                        {% if item.discount > 0 %}
+                        <p class="text-danger text-center"><small>{{item.discount}}% Discount</small></p>
+                        {% endif %}
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+</main>
+{% endblock %}
