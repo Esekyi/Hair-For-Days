@@ -1,0 +1,33 @@
+{% extends "base2.html" %}
+{% block body %}
+{% from "_formhelpers.html" import render_field %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <h1 class="bg-info text-center">Create Account</h1>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <form action="" method="post">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                {{ render_field(form.fname) }}
+                {{ render_field(form.lname) }}
+                {{ render_field(form.email) }}
+                {{ render_field(form.password) }}
+                {{ render_field(form.confirm) }}
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+{% endblock %}

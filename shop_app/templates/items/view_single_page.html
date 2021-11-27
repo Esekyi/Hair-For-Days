@@ -15,8 +15,17 @@
   .navbarMain {
     border-bottom: solid 5px #b08b57;
     text-transform: uppercase;
-    font-size: 15px
+    font-size: 15px;
+    letter-spacing: .25px;
+    color: black;
+    font-family: 'Poppins', sans-serif;
   }
+   .logo-top{
+    font-size: 25px;
+    line-height: 20px;
+    margin-left: 3px;
+    font-family: 'Bree Serif', serif;
+   }
 
   .featurette-divider {
     margin: 5rem 0;
@@ -74,10 +83,12 @@
 
 <!-- Navbar starts -->
 
-<nav class="navbar navbar-dark bg-dark navbar navbar-expand-lg navbarMain">
-  <div class="container-fluid" style="padding-top: 1rem;">
-    <a class="navbar-brand text-info" href="#">
-      hair<span class="text-white">ForDay$</span>
+<nav class="navbar navbar-light bg-light navbar navbar-expand-lg sticky-top navbarMain">
+  <div class="container-fluid">
+    <img src="{{url_for('static', filename='images/hairForDaysLOGO.png')}}" style="margin-right: 3px;" alt="" width="50">
+    <!--===============LOGO SVG IMAGE =================-->
+    <a class="navbar-brand text logo-top" href="/" style="color: rgb(218, 170, 72);">
+      <span>hair</span><span style="color: black;">ForDay$</span>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,7 +116,7 @@
 </nav>
 
 <!-- Navbar ends -->
-<nav id="navbar_top" class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top navbarMain">
+<!-- <nav id="navbar_top" class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top navbarMain">
   <div class="container">
     <div class="row">
       <div class="col-lg-4">
@@ -119,8 +130,8 @@
       <h3 class="nav-item">${{item.price | numberFormat}}</h3>
     </div>
 
-  </div> <!-- navbar-collapse.// -->
-</nav>
+  </div> navbar-collapse.//
+</nav> -->
 
 <div class="container mt-5">
   <div class="row featurette">
@@ -144,13 +155,22 @@
         <input type="hidden" name="item_id" value="{{item.id}}">
         <button type="submit" class="btn btn-sm btn-info">Add to Bag</button>
         <label for="">Quantity:</label>
-        <input type="number" name="quantity" id="" value="1" min="1" max="{{item.stock}}">
+        <input type="number" name="quantity" value="1" min="1" max="10">
         {% set colors = item.colors.split(',') %}
         <label for="colors">Colors:</label>
         <select name="colors" id="colors">
           {% for color in colors %}
           {% set col = color.split(':') %}
           <option value="{{col[0]}}">{{col[0] | capitalize}}</option>
+          {% endfor %}
+        </select>
+
+        {% set sizes = item.sizes.split(',') %}
+        <label for="sizes">sizes:</label>
+        <select name="sizes" id="sizes">
+          {% for size in sizes %}
+          {% set siz = size.split(':') %}
+          <option value="{{siz[0]}}">{{siz[0] | capitalize}}</option>
           {% endfor %}
         </select>
       </form>

@@ -1,5 +1,5 @@
 from typing import Dict
-from shop_app.items.routes import vehiclePart
+from shop_app.items.routes import wigItem
 from flask import redirect, render_template, url_for, flash, request, session, current_app
 from shop_app import db, app
 from shop_app.items.models import AddItem
@@ -74,12 +74,14 @@ def updatebag(code):
     if request.method == "POST":
         quantity = request.form.get('quantity')
         color = request.form.get('color')
+        size = request.form.get('size')
         try:
             session.modified = True
             for key, item in session['ShoppingBag'].items():
                 if int(key) == code:
                     item['quantity'] = quantity
                     item['color'] = color
+                    item['size'] =size
                     flash('Item has been Updated!')
                     return redirect(url_for('getBag'))
         except Exception as e:

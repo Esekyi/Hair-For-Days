@@ -24,3 +24,4 @@ search.init_app(app)
 from shop_app.admin import routes
 from shop_app.items import routes
 from shop_app.Bag import Bag
+from shop_app.users_account import routes

@@ -6,7 +6,7 @@ import secrets
 import os
 
 
-@app.route('user/register', methods=['GET', 'POST'])
+@app.route('/user/register', methods=['GET', 'POST'])
 def user_register():
     form = UserRegisterationForm(request.form)
     return render_template('User-customer/register.html', form=form)

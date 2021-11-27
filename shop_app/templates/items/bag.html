@@ -232,21 +232,37 @@
                                 alt="{{item.name}}" />
                             <div>
                                 <p class="name">{{item.name}}</p>
-                                <span style="font-size: 12.5px;">Size: XL</span>
 
                                 <form action="{{url_for('updatebag', code=key)}}" method="post">
 
                                     {% set colors = item.colors.split(',') %}
-                                    <label for="colors">Colors:</label>
-                                    <select name="color" id="color">
-                                        <option value="{{item.color}}" style="display: none;">{{item.color |
-                                            capitalize}}</option>
-                                        {% for color in colors %}
-                                        {% set col = color.split(':') %}
-                                        <option value="{{col[0]}}">{{col[0] | capitalize}}</option>
-                                        {% endfor %}
-                                    </select>
-                                    <br>
+                                    <div style="margin-bottom: 5px;">
+                                        <label for="colors">Colors:</label>
+                                        <select name="color" id="color">
+                                            <option value="{{item.color}}" style="display: none;">{{item.color |
+                                                capitalize}}</option>
+                                            {% for color in colors %}
+                                            {% set col = color.split(':') %}
+                                            <option value="{{col[0]}}">{{col[0] | capitalize}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    
+
+                                    {% set sizes = item.sizes.split(',') %}
+                                    <div style="margin-bottom: 5px;">
+                                        <label for="sizes" style="margin-right: 6px;">Sizes:</label>
+                                        <select name="size" id="size">
+                                            <option value="{{item.size}}" style="display: none;">{{item.size |
+                                                capitalize}}</option>
+                                            {% for size in sizes %}
+                                            {% set siz = size.split(':') %}
+                                            <option value="{{siz[0]}}">{{siz[0] | capitalize}}</option>
+                                            {% endfor %}
+                                        </select>
+
+                                    </div>
+                                    
 
                                     <button type="submit" class="edit-button"><i class="fas fa-pencil-alt"
                                             style="font-size: 10px;color:#777;padding-right: 3px;"></i>Edit
@@ -254,7 +270,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="cell" id="qty">
+                        <form action="{{url_for('updatebag', code=key)}}" method="post" class="cell" id="qty">
                             <div style="margin-left: auto;">
                                 <div>
                                     <div>
@@ -267,7 +283,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                         <div class="cell" style="display: flex; flex-direction: column;">
                             <form style="display: flex; flex-direction: column; flex: 1;"
                                 action="{{url_for('updatebag', code=key)}}" method="post">
@@ -310,7 +326,7 @@
                                 style="text-align: right; color: rgb(63, 62, 62); font-size: 10px;font-weight: 400;">Clear
                                 Bag</a>
                         </div>
-                        <form style="display: flex; flex-direction: column; align-items: flex-end;">
+                        <form action="{{url_for('updatebag', code=key)}}" method="post" style="display: flex; flex-direction: column; align-items: flex-end;">
                             <span style="margin-bottom: -15px;padding: 0px;font-size: 10px;">Qty</span>
                             <div class="cell">
                                 <div>
