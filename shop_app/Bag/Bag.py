@@ -38,6 +38,7 @@ def AddtoBag():
                         if int(key) == int(item_id):
                             session.modified = True
                             item['quantity'] += 1
+                            return item['quantity']
                 else:
                     session['ShoppingBag'] = MergeDicts(
                         session['ShoppingBag'], DictItems)
@@ -64,7 +65,7 @@ def getBag():
         total -= discount
         tax = ("%.2f" % (.06 * float(total)))
         grandTotal = float("%.2f" % (1.06 * total))
-    return render_template('items/bag.html', tax=tax, grandTotal=grandTotal, brands=brands(), categorys=categorys())
+    return render_template('items/bag.html', tax=tax, grandTotal=grandTotal, brands=brands(), categorys=categorys(), title='Shopping Bag | HairForDays')
 
 
 @app.route('/updatebag/<int:code>', methods=['POST'])
