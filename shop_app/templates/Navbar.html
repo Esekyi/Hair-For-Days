@@ -10,6 +10,10 @@
   .nav-item{
     color: rgb(0, 0, 0);
   }
+  .dropdownHover:hover{
+    transition: background-color .3s ease,color .3s ease;
+    opacity: 1;
+  }
   .logo-top{
     font-size: 25px;
     line-height: 20px;
@@ -43,10 +47,10 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp;Home</a>
+            <a class="nav-link active" aria-current="page" href="{{url_for('home')}}"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp;Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/"><i class="fas fa-car"></i>&nbsp;Vehicles and Parts</a>
+            <a class="nav-link" href="/"><i class="fas fa-car"></i>&nbsp;Wigs</a>
           </li>
 
           <li class="nav-item dropdown">
@@ -70,15 +74,40 @@
               {% endfor %}
             </ul>
           </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <i class="fas fa-user-circle"></i>&nbsp;Account
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% if current_user.is_authenticated %}
+              <li>
+                <h6 class="dropdown-header">Hi {{current_user.fname}}</h6>
+              </li>
+              <li><a class="dropdown-item dropdownHover" href="{{url_for('userLogOut')}}">
+                <i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a></li>
+            {% else %}
+              <li>
+                <h6 class="dropdown-header">Hi 🤗</h6>
+              </li>
+              <li><a class="dropdown-item dropdownHover" href="{{url_for('userLogin')}}">
+                <i class="fas fa-sign-in-alt"></i>&nbsp;LogIn/Register</a></li>
+            {% endif %}
+          </ul>
+        </li>
+
           <li class="nav-item">
             <a class="nav-link" href="{{url_for('getBag')}}" tabindex="-1"><i class="fas fa-shopping-bag"></i>&nbsp; Bag ({{session['ShoppingBag'] | length}})</a>
           </li>
 
         </ul>
-        <form class="d-flex" action="{{url_for('searchresult')}}">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
-          <button class="btn btn-outline-gray" type="submit">Search</button>
-        </form>
+        <div class="d-flex">
+          <form class="d-flex" action="{{url_for('searchresult')}}">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
+            <button class="btn btn-outline-gray" type="submit">Search</button>
+          </form>
+        </div>
       </div>
     </div>
   </nav>

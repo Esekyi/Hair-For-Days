@@ -102,7 +102,7 @@
               aria-hidden="true"></i>&nbsp;Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/"><i class="fas fa-car"></i>&nbsp;Vehicles and Parts</a>
+          <a class="nav-link" href="/"><i class="fas fa-car"></i>&nbsp;Wigs</a>
         </li>
 
         <li class="nav-item">
@@ -134,6 +134,8 @@
 </nav> -->
 
 <div class="container mt-5">
+        {% include '_messages.html' %}
+
   <div class="row featurette">
     <div class="col-md-5 order-md-1" id="first_image">
       <img src="{{url_for('static', filename='images/' + item.image_1)}}" alt="{{item.name}}" width="500">

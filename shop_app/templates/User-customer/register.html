@@ -1,28 +1,116 @@
 {% extends "base2.html" %}
 {% block body %}
 {% from "_formhelpers.html" import render_field %}
+<!-- Navbar starts -->
+<style>
+     .navbarMain {
+    border-bottom: solid 5px #b08b57;
+    text-transform: uppercase;
+    font-size: 15px;
+    letter-spacing: .25px;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+  }
+   .logo-top{
+    font-size: 25px;
+    line-height: 20px;
+    margin-left: 3px;
+    font-family: 'Bree Serif', serif;
+   }
+   .form-inputs{
+       color: #000;
+       font-size: 16px;
+       font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   }
+   .registerBtn{
+       background-color: #000;
+       color: #fff;
+       border: none;
+       font-size: 12px;
+       font-weight: bold;
+       padding: 10px 40px;
+       text-transform: uppercase;
+       letter-spacing: 1px;
+   }
+   .registerBtn:hover{
+       color: #000;
+       background-color: #fff;
+       border: 1px solid #000;
+       transition: background-color .3s ease,color .3s ease;
+       opacity: 1;
+   }
+
+</style>
+
+<nav class="navbar navbar-light bg-light navbar navbar-expand-lg navbarMain">
+    <div class="container-fluid">
+        <img src="{{url_for('static', filename='images/hairForDaysLOGO.png')}}" style="margin-right: 3px;" alt=""
+            width="50">
+        <!--===============LOGO SVG IMAGE =================-->
+        <a class="navbar-brand text logo-top" href="/" style="color: rgb(218, 170, 72);">
+            <span>hair</span><span style="color: black;">ForDay$</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/"><i class="fa fa-home fa-fw"
+                            aria-hidden="true"></i>&nbsp;Home</a>
+                </li>
+                
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Navbar ends -->
 
 <div class="container">
-    <div class="row">
+    <div class="row" style="margin-top: 50px;">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <h1 class="bg-info text-center">Create Account</h1>
+            <h1 class="text-center mb-3" style="color: black; font-family: Verdana, Geneva, Tahoma, sans-serif;text-transform: uppercase; letter-spacing: -1px;height: 73px; margin: 19px 0 0;">Create Account</h1>
+            <p class="mb-4"> <a style="color: #000;" href="/user/login"> Back to Customer Login </a></p>
         </div>
         <div class="col-md-2"></div>
     </div>
     <form action="" method="post">
+        {{ form.csrf_token }}
         <div class="row">
             <div class="col-md-2"></div>
-            <div class="col-md-4">
-                {{ render_field(form.fname) }}
-                {{ render_field(form.lname) }}
-                {{ render_field(form.email) }}
-                {{ render_field(form.password) }}
-                {{ render_field(form.confirm) }}
+            <div class="col-md-4 form-inputs">
+                {{ render_field(form.fname, class="form-control") }}
+                {{ render_field(form.lname, class="form-control") }}
+                {{ render_field(form.email, class="form-control") }}
+                {{ render_field(form.password, class="form-control") }}
+                {{ render_field(form.confirm, class="form-control") }}
+                {{ render_field(form.country, class="form-control") }}
+                <div class="col-md-2"></div>
             </div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4"></div>
+            <div class="col-md-4 form-inputs">
+                {{ render_field(form.state, class="form-control") }}
+                {{ render_field(form.city, class="form-control") }}
+                {{ render_field(form.zipcode, class="form-control") }}
+                {{ render_field(form.address, class="form-control") }}
+                {{ render_field(form.contact, class="form-control") }}
+                
+            </div>
+            
         </div>
+        <div class="row" style="margin-bottom: 90px;">
+            <div class="col-md-2"></div>
+            <div class="col-md-8" style="justify-content: space-between; display: flex;">
+                {{form.profile  }}
+
+                {{form.submit (class="registerBtn btn mb-3")}}
+            </div>
+        </div>
+            
     </form>
 </div>
 

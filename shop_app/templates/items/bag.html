@@ -84,10 +84,13 @@
     .checkout-btn {
         border: none;
         background-color: #000;
-        color: #fff;
         font-size: 14px;
         text-transform: uppercase;
         padding: 12px 0;
+    }
+    .checkout-btn:hover{
+        color: #000;
+        background-color: #fff;
     }
 
     .qty-selector {
@@ -182,7 +185,7 @@
         }
 
         #qty-bottom {
-            display: initial;
+            display: flex;
         }
 
         #removeButton1 {
@@ -193,6 +196,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-top: .05px;
         }
     }
 </style>
@@ -263,108 +267,117 @@
 
                                     </div>
                                     
+                                    
+                                            
+                                            <button type="submit" class="edit-button"><i class="fas fa-pencil-alt"
+                                                style="font-size: 10px;color:#777;padding-right: 3px;text-align: left;"></i>Edit
+                                            </button>
+                                        </div>
+                                    </div>
 
-                                    <button type="submit" class="edit-button"><i class="fas fa-pencil-alt"
-                                            style="font-size: 10px;color:#777;padding-right: 3px;"></i>Edit
+                                    
+                                    
+                                    
+                                    <div style="margin-left: auto;">
+                                        <div>
+                                            <div class="cell" id="qty">
+                                                <div style="padding: 8px 0;">
+                                                    <input class="qty-selector"
+                                                    value="{{item.quantity}}" name="quantity" type="number" min="1" max="10"
+                                                    style="width: 80px; padding: 5px 0px; text-align: center;color: #000;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            
+                                        <div class="cell" style="display: flex; flex-direction: column;">
+                                            <div style="display: flex; flex-direction: column; flex: 1;">
+                                                {% set total = item.quantity|int * item.price|float %}
+                                                {% if item.discount > 0 %}
+                                                <p style="text-decoration: line-through; margin: 0;">${{(item.quantity|int *
+                                                    item.price|float) | numberFormat}}</p>
+                                                    {%else%}
+                                                    <p></p>
+                                                    {%endif%}
+                                                    {% if item.discount > 0 %}
+                                                    <p style="font-size: 16px; font-weight: 500; color: #a00; margin-bottom: auto;">
+                                                        ${{"%0.2f"|format((total|float) -
+                                                        discount|float)|numberFormatFloat}}</p>
+                                                        {%else%}
+                                                        <p style="font-size: 16px; font-weight: 500; color: #a00; margin-bottom: auto;">
+                                                            ${{item.price | numberFormat}}</p>
+                                                            {% endif %}
+                                                            
+                                                            <div style="display: flex; flex-direction: column; align-items: flex-end;" >
+                                                                <span style="margin-bottom: -15px;padding: 0px;font-size: 10px;">Qty</span>
+                                                                <div class="cell">
+                                                                    <div>
+                                                                        <div id="qty-bottom">
+                                                                            <div style="padding: 8px 0;">
+                                                                                <input class="qty-selector" style="width: 80px; padding: 5px 0px; text-align: center;color: #000;"
+                                                                                    name="quantity" type="number" min="1" max="10" value="{{item.quantity}}">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                    </form>
+                                        </div>
+                        
+                                    <div class="clear-bag"
+                                        style="display: flex; align-items: center; justify-content: flex-end; column-gap: 5px;"
+                                        id="removeButton1">
+                                        <a href="{{url_for('removeitem', id=key)}}" id="removeButton"
+                                            style="text-align: right; color: rgb(63, 62, 62); font-size: 10px; font-weight: 400;">Remove</a>
+                                        <span
+                                            style="padding: 0px 15px; font-size: 10px; color: rgb(191, 191, 191);">|</span>
+                                        <a href="{{url_for('emptyBag', id=key)}}" id="removeButton"
+                                            style="text-align: right; color: rgb(63, 62, 62); font-size: 10px;font-weight: 400;">Clear
+                                            Bag</a>
+                                    </div>
+                                </div>
+                                </div>
+                                <div id="m-view">
+                                    <div style="display: flex; align-items: center; justify-content: flex-end; column-gap: 5px;"
+                                        id="removeButton-m">
+                                        <a href="{{url_for('removeitem', id=key)}}" id="removeButton"
+                                            style="text-align: right; color: rgb(63, 62, 62); font-size: 10px; font-weight: 400;">Remove</a>
+                                        <span style="padding: 0px 15px; font-size: 10px; color: rgb(191, 191, 191);">|</span>
+                                        <a href="{{url_for('emptyBag', id=key)}}" id="removeButton"
+                                            style="text-align: right; color: rgb(63, 62, 62); font-size: 10px;font-weight: 400;">Clear
+                                            Bag</a>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="discount-box">
+                        <div style="margin-bottom: 2px;">
+                            <div class="code-form">
+                                <input placeholder="Discount code" style="font-size: 12px;" type="text">
+                                <button>Apply</button>
+                            </div>
+                        </div>
+                        <div class="bottom-part">
+                            <div style="color: rgb(124, 42, 42); display: flex; align-items: center; justify-content: space-between; padding-inline: 20px; padding-top: 10px;"
+                                class="subtotal">
+                                <span>Tax</span>
+                                <h6>${{tax|numberFormatFloat}}</h6>
+                            </div>
+                            <div style="color: #000; display: flex; align-items: center; justify-content: space-between; padding-inline: 20px;"
+                                class="subtotal">
+                                <span><b>Subtotal</b> ({{session['ShoppingBag'] | length}} items)</span>
+                                <h5>${{grandTotal|numberFormat}}</h5>
+                            </div>
+                            <div style="padding: 20px;">
+                                <a style="text-decoration: none; color: #fff;" href="{{url_for('get_order')}}">
+                                    <button class="checkout-btn" style="color: #fff; width: 100%;">
+                                        Checkout 
                                     </button>
-                                </form>
-                            </div>
-                        </div>
-                        <form action="{{url_for('updatebag', code=key)}}" method="post" class="cell" id="qty">
-                            <div style="margin-left: auto;">
-                                <div>
-                                    <div>
-                                        <div style="padding: 8px 0;">
-                                            <input class="qty-selector"
-                                                style="width: 80px; padding: 5px 0px; text-align: center;color: #000;"
-                                                name="quantity" type="number" min="1" max="10"
-                                                value="{{item.quantity}}">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        <div class="cell" style="display: flex; flex-direction: column;">
-                            <form style="display: flex; flex-direction: column; flex: 1;"
-                                action="{{url_for('updatebag', code=key)}}" method="post">
-                                {% set total = item.quantity|int * item.price|float %}
-                                {% if item.discount > 0 %}
-                                <p style="text-decoration: line-through; margin: 0;">${{(item.quantity|int *
-                                    item.price|float) | numberFormat}}</p>
-                                {%else%}
-                                <p></p>
-                                {%endif%}
-                                {% if item.discount > 0 %}
-                                <p style="font-size: 16px; font-weight: 500; color: #a00; margin-bottom: auto;">
-                                    ${{"%0.2f"|format((total|float) -
-                                    discount|float)|numberFormatFloat}}</p>
-                                {%else%}
-                                <p style="font-size: 16px; font-weight: 500; color: #a00; margin-bottom: auto;">
-                                    ${{item.price | numberFormat}}</p>
-                                {% endif %}
-                                <div class="clear-bag"
-                                    style="display: flex; align-items: center; justify-content: flex-end; column-gap: 5px;"
-                                    id="removeButton1">
-                                    <a href="{{url_for('removeitem', id=key)}}" id="removeButton"
-                                        style="text-align: right; color: rgb(63, 62, 62); font-size: 10px; font-weight: 400;">Remove</a>
-                                    <span
-                                        style="padding: 0px 15px; font-size: 10px; color: rgb(191, 191, 191);">|</span>
-                                    <a href="{{url_for('emptyBag', id=key)}}" id="removeButton"
-                                        style="text-align: right; color: rgb(63, 62, 62); font-size: 10px;font-weight: 400;">Clear
-                                        Bag</a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div id="m-view">
-                        <div style="display: flex; align-items: center; justify-content: flex-end; column-gap: 5px;"
-                            id="removeButton-m">
-                            <a href="{{url_for('removeitem', id=key)}}" id="removeButton"
-                                style="text-align: right; color: rgb(63, 62, 62); font-size: 10px; font-weight: 400;">Remove</a>
-                            <span style="padding: 0px 15px; font-size: 10px; color: rgb(191, 191, 191);">|</span>
-                            <a href="{{url_for('emptyBag', id=key)}}" id="removeButton"
-                                style="text-align: right; color: rgb(63, 62, 62); font-size: 10px;font-weight: 400;">Clear
-                                Bag</a>
-                        </div>
-                        <form action="{{url_for('updatebag', code=key)}}" method="post" style="display: flex; flex-direction: column; align-items: flex-end;">
-                            <span style="margin-bottom: -15px;padding: 0px;font-size: 10px;">Qty</span>
-                            <div class="cell">
-                                <div>
-                                    <div>
-                                        <div style="padding: 8px 0;">
-                                            <input class="qty-selector"
-                                                style="width: 80px; padding: 5px 0px; text-align: center;color: #000;"
-                                                name="quantity" type="number" min="1" max="10"
-                                                value="{{item.quantity}}">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                    </a>
                 </div>
-                {% endfor %}
-            </div>
-        </div>
-        <div class="discount-box">
-            <div style="margin-bottom: 2px;">
-                <form class="code-form">
-                    <input placeholder="Discount code" style="font-size: 12px;" type="text">
-                    <button>Apply</button>
-                </form>
-            </div>
-            <div class="bottom-part">
-                <div style="color: rgb(124, 42, 42); display: flex; align-items: center; justify-content: space-between; padding-inline: 20px; padding-top: 10px;"
-                    class="subtotal">
-                    <span>Tax</span>
-                    <h6>${{tax|numberFormatFloat}}</h6>
-                </div>
-                <div style="color: #000; display: flex; align-items: center; justify-content: space-between; padding-inline: 20px;"
-                    class="subtotal">
-                    <span><b>Subtotal</b> ({{session['ShoppingBag'] | length}} items)</span>
-                    <h5>${{grandTotal|numberFormat}}</h5>
-                </div>
-                <div style="padding: 20px;"><button class="checkout-btn" style=" width: 100%;">Checkout</button></div>
             </div>
         </div>
     </div>

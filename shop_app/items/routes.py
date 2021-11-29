@@ -56,7 +56,7 @@ def view_single_page(id):
         AddItem, (Brand.id == AddItem.brand_id)).all()
     categorys = Category.query.join(
         AddItem, (Category.id == AddItem.category_id)).all()
-    return render_template('items/view_single_page.html', item=item, brands=brands, categorys=categorys, title='{name} | HairForDays')
+    return render_template('items/view_single_page.html', item=item, brands=brands, categorys=categorys, title='View Item | HairForDays')
 
 
 @app.route('/brand/<int:id>')
