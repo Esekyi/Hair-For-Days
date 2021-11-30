@@ -4,9 +4,12 @@
   {% if field.errors %}
     <ul class=errors>
     {% for error in field.errors %}
-      <li>{{ error }}</li>
+    <span style="color:red;">
+      {{ error }}
     {% endfor %}
+    </span>
     </ul>
   {% endif %}
   </dd>
 {% endmacro %}
+
