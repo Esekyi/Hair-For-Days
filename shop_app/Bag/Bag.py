@@ -64,7 +64,7 @@ def getBag():
         total += float(item['price']) * int(item['quantity'])
         total -= discount
         tax = ("%.2f" % (.06 * float(total)))
-        grandTotal = float("%.2f" % (1.06 * total))
+        grandTotal += float("%.2f" % (1.06 * total))
     return render_template('items/bag.html', tax=tax, grandTotal=grandTotal, brands=brands(), categorys=categorys(), title='Shopping Bag | HairForDays')
 
 
