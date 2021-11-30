@@ -1,0 +1,325 @@
+{% extends 'base2.html'%}
+{% block body %}
+{% include 'Navbar.html' %}
+<style>
+    * {
+        outline: none;
+    }
+
+    .cart-container {
+        padding: 50px 10%;
+        
+    }
+
+    .cart-heading {
+        display: flex;
+    }
+
+    .cart-items-section {
+        display: flex;
+        column-gap: 5%;
+        margin-top: 50px;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+
+    .cart-items {
+        flex: 1;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .cart-items .header,
+    .cart-items .item-row {
+        display: flex;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .item-row {
+        display: flex;
+    }
+
+    .item-row .name {
+        color: black;
+        font-size: 15px;
+        margin: 0;
+    }
+
+    .item-row .name:hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .cell {
+        padding: 10px 0;
+        font-size: 12px;
+        font-weight: bold;
+        flex: 0.3;
+        text-align: right;
+    }
+
+    #qty-bottom {
+        display: none;
+    }
+
+    .cell.stretch {
+        flex: 1;
+        text-align: left;
+    }
+
+    .discount-box {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .discount-box button:hover {
+        background-color: #fff;
+        color: rgb(145, 28, 28);
+        border: 1px solid #000;
+    }
+
+    .checkout-btn {
+        border: none;
+        background-color: #000;
+        font-size: 14px;
+        text-transform: uppercase;
+        padding: 12px 0;
+    }
+
+    .checkout-btn:hover {
+        color: #000;
+        background-color: #fff;
+    }
+
+    .qty-selector {
+        border: 1px solid #555;
+        margin-left: auto;
+        display: flex;
+        width: initial;
+        column-gap: 5px;
+    }
+
+    .qty-selector div {
+        padding: 8px 12px;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+    .code-form {
+        display: flex;
+        padding: 20px;
+        column-gap: 10px;
+        border-radius: 0;
+    }
+
+    .code-form input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #777;
+    }
+
+    #m-view {
+        display: none;
+        margin-top: -30px;
+    }
+
+
+    @media (max-width: 1143px) {
+        .cart-items-section {
+            flex-direction: column;
+        }
+
+        .discount-box {
+            max-width: 100%;
+            display: flex;
+            column-gap: 20px;
+        }
+
+        .discount-box>* {
+            flex: 1;
+        }
+    }
+
+    @media (max-width: 650px) {
+        .discount-box {
+            max-width: 100%;
+            flex-direction: column;
+        }
+
+        .discount-box>* {
+            flex: 1;
+        }
+    }
+
+    @media (max-width: 731px) {
+
+        #m-view {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: .05px;
+        }
+    }
+</style>
+
+<div class="cart-container">
+    <div
+        style="text-align: center; background-color: rgb(243, 248, 242);text-transform: uppercase; font-size: smaller;color: rgb(38, 114, 33);">
+        {% include '_messages.html' %}
+    </div>
+    <div class="cart-heading">
+        <span style="flex: 1">
+            <div style="flex-direction: row; display: flex;">
+                <h2 style="color: #000; font-weight: 500; font-size: 15px; margin-bottom: 0px; padding-bottom: 5px;">
+                    INVOICE CODE:&nbsp;  
+                </h2>
+                <h2 style="color: #000; font-weight: 400; font-size: 15px; text-decoration: underline; color: #a00;">{{orders.invoice}}</h2>    
+            </div>
+            <h2 style="font-size: 15px" >status: {{orders.status}}</h2>
+        </span>
+        <div style="flex: 1"></div>
+        
+    </div>
+    <div class="cart-items-section">
+        <div class="cart-items">
+            <span style="flex: 1">
+            
+                <h2 style="color: #000; font-weight: 700; text-transform: uppercase; font-size: 17px; margin-bottom: 0px; padding-bottom: 10px;">
+                    Contact Information </h2>
+            </span>
+            <div> </div>
+            <div></div>
+            <div class="content">
+                <div>
+                    Email: {{user.email}}
+                </div>
+                <div style="flex-direction: row;">
+                    Name: {{user.fname}}
+                    {{user.lname}}
+                </div>
+                <div>Contact: {{user.contact}}</div>
+                <hr>
+
+                <span style="flex: 1">
+                
+                    <h2 style="color: #000; font-weight: 700; text-transform: uppercase; font-size: 17px; margin-bottom: 0px; padding-bottom: 10px;">
+                        Shipping Address </h2>
+                </span>
+                <div>
+                    Street Address - {{user.address}}
+                </div>
+                <div>
+                    State - {{user.state}}
+                </div>
+                <div>
+                    City - {{user.city}}
+                </div>
+                <div>
+                    Zip/Postal Code - {{user.zipcode}}
+                </div>
+                <div>
+                    Country - {{user.country}}
+                </div>
+
+                <div style="border-bottom: 1px solid #eee;">
+                    <div style="display: flex;">
+                        
+
+
+
+                        <div class="cell" style="display: flex; flex-direction: column;">
+                            <div style="display: flex; flex-direction: column; flex: 1;">
+                                
+                                
+
+                            
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+             
+            </div>
+        </div>
+
+
+
+        <div class="discount-box">
+            <div class="bottom-part">
+                <div style="color: rgb(124, 42, 42); display: flex; align-items: center; justify-content: space-between; padding-inline: 20px; padding-top: 10px;"
+                    class="subtotal">
+                    <span>Tax</span>
+                    <h6>${{tax|numberFormatFloat}}</h6>
+                </div>
+                <div style="color: #000; display: flex; align-items: center; justify-content: space-between; padding-inline: 20px;"
+                    class="subtotal">
+                    <span><b>Subtotal</b> ({{orders.orders | length}} items)</span>
+                    <h5>${{grandTotal | numberFormatFloat}}</h5>
+                </div>
+                <div style="padding: 20px;">
+                    {% if orders.status == 'Paid'  %}
+                        {% else %}
+                        <form action=" {{url_for('payment')}} " method="POST">
+                                {% set amount = grandTotal.replace('.','') %}
+                                <input type="hidden" name="amount" value=" {{amount}} ">
+                                <input type="hidden" name="invoice" value=" {{orders.invoice}} ">
+                                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                    data-key="pk_test_51K1bMSIiaYOuKbIdxbCz4eV199VqWnnKDo3b8V8pMitzOrNgCOctbpXzAZpuw3CquCFbnRepbGQzA1NMr9fEijix00fJiibmD9" data-name=" HAIR FOR DAYs "
+                                    data-description=" {{user.fname}} " data-amount="{{amount}}" data-currency="usd">
+                                    </script>
+                        </form>
+                    {% endif %}
+
+                    <hr style="margin-top: 30px; margin-inline: -20px;">
+                </div>
+            </div>
+            <div class="content" style="padding-inline: 10px;">
+                {% for key, item in orders.orders.items() %}
+                {% set discount = "%0.2f" |format((item.discount/100) * item.price|float) %}
+                <div style="border-bottom: 1px solid #eee;">
+                    <div style="display: flex;">
+                        <div class="cell stretch" style="display: flex; column-gap: 20px; font-weight: 400;">
+                            <img width="120" style="object-fit: cover; " height="150"
+                                src="{{url_for('static', filename='images/'+item.image)}}" alt="{{item.name}}" />
+                            <div>
+                                <p class=".name">{{item.name}}</p>
+                                <div style="color: #000;">Color: {{item.color | capitalize}}</div>
+                                <div style="color: #000;">Size: {{item.size | capitalize}} </div>
+                                <div style="color: #000;">Quantity: {{item.quantity}} </div>
+                            </div>
+                        </div>
+            
+            
+            
+                        <div class="cell" style="display: flex; flex-direction: column;">
+                            <div style="display: flex; flex-direction: column; flex: 1;">
+                                {% set total = item.quantity|int * item.price|float %}
+                                {% if item.discount > 0 %}
+                                <p style="text-decoration: line-through; margin: 0;">${{(item.quantity|int *
+                                    item.price|float) | numberFormat}}</p>
+                                {%else%}
+                                <p></p>
+                                {%endif%}
+                                {% if item.discount > 0 %}
+                                <p style="font-size: 16px; font-weight: 500; color: #a00; margin-bottom: auto;">
+                                    ${{"%0.2f"|format((total|float) -
+                                    discount|float)|numberFormatFloat}}</p>
+                                {%else%}
+                                <p style="font-size: 16px; font-weight: 500; color: #a00; margin-bottom: auto;">
+                                    ${{(total|float) | numberFormat}}</p>
+                                {% endif %}
+            
+                                </form>
+                            </div>
+            
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+           
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
