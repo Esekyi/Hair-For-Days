@@ -10,7 +10,7 @@ from flask_login import LoginManager
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config['DATABASE_URL'] = 'sqlite:///test.db'
 app.config['SECRET_KEY'] = 'Q19shyfytfgvgvEO9mBoqY519NN7'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
